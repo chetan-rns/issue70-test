@@ -10,7 +10,7 @@
           == 'chetan-rns/taxi'
     - github:
         secretRef:
-          secretKey: svc-secret-key
+          secretKey: webhook-secret-key
           secretName: svc-taxi-secret
     name: app-ci-build-from-pr
     template:
@@ -26,7 +26,7 @@
           == 'chetan-rns/taxi') && body.ref.startsWith('refs/heads/master')
     - github:
         secretRef:
-          secretKey: svc-secret-key
+          secretKey: webhook-secret-key
           secretName: svc-taxi-secret
     name: app-cd-deploy-from-master
     template:
