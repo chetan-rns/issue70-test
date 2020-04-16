@@ -32,7 +32,7 @@ spec:
     - name: YAMLPATHTOIMAGE
       value: spec.template.spec.containers[0].image
     - name: NAMESPACE
-      value: chetan-stage-environment
+      value: foo-cicd
     resources:
       inputs:
       - name: source
