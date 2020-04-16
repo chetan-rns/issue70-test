@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
   creationTimestamp: null
-  name: dev-cd-deploy-from-master-template
+  name: app-cd-template
   namespace: foo-cicd
 spec:
   params:
@@ -18,7 +18,7 @@ spec:
       name: dev-cd-pipeline-run-$(uid)
     spec:
       pipelineRef:
-        name: dev-cd-pipeline
+        name: app-cd-pipeline
       resources:
       - name: source-repo
         resourceSpec:
