@@ -1,0 +1,33 @@
+- op: add
+  path: /spec/triggers/-
+  value:
+    bindings:
+    - name: github-pr-binding
+    interceptors:
+    - cel:
+        filter: (header.match('X-GitHub-Event', 'pull_request') && body.action ==
+          'opened' || body.action == 'synchronize') && body.pull_request.head.repo.full_name
+          == 'chetan-rns/taxi'
+    - github:
+        secretRef:
+          secretKey: svc-secret-key
+          secretName: svc-taxi-secret
+    name: app-ci-build-from-pr
+    template:
+      name: app-ci-template
+- op: add
+  path: /spec/triggers/-
+  value:
+    bindings:
+    - name: github-push-binding
+    interceptors:
+    - cel:
+        filter: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
+          == 'chetan-rns/taxi') && body.ref.startsWith('refs/heads/master')
+    - github:
+        secretRef:
+          secretKey: svc-secret-key
+          secretName: svc-taxi-secret
+    name: app-cd-deploy-from-master
+    template:
+      name: app-cd-template

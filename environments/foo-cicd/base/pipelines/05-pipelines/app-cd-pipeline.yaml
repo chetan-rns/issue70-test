@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  creationTimestamp: null
+  name: app-cd-pipeline
+  namespace: foo-cicd
+spec:
+  resources:
+  - name: source-repo
+    type: git
+  tasks:
+  - name: apply-source
+    params:
+    - name: NAMESPACE
+      value: foo-cicd
+    resources:
+      inputs:
+      - name: source
+        resource: source-repo
+    taskRef:
+      kind: Task
+      name: deploy-from-source-task

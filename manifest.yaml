@@ -1,0 +1,3 @@
+environments:
+- cicd: true
+  name: foo-cicd
