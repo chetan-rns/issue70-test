@@ -1,4 +1,4 @@
 bases:
-- ../../../../environments/cicd/overlays
+- ../../../../environments/foo-cicd/overlays
 resources:
 - app-webhook-secret.yaml
