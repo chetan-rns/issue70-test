@@ -5,20 +5,28 @@ metadata:
   name: app-ci-pipeline
   namespace: foo-cicd
 spec:
+  params:
+  - name: REPO
+    type: string
+  - name: COMMIT_SHA
+    type: string
   resources:
   - name: source-repo
     type: git
+  - name: runtime-image
+    type: image
   tasks:
-  - name: apply-source
+  - name: build-image
     params:
-    - name: NAMESPACE
-      value: foo-cicd
-    - name: DRYRUN
-      value: "true"
+    - name: TLSVERIFY
+      value: "false"
     resources:
       inputs:
       - name: source
         resource: source-repo
+      outputs:
+      - name: image
+        resource: runtime-image
     taskRef:
-      kind: Task
-      name: deploy-from-source-task
+      kind: ClusterTask
+      name: buildah
